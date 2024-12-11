@@ -1,0 +1,78 @@
+{
+  "name": "xaml-lineup",
+  "displayName": "Xaml LineUp",
+  "description": "A VS Code extension that formats XAML attributes inline, keeping them on the same line for improved readability.",
+  "version": "0.0.1",
+  "publisher": "barkerbg001",
+  "icon": "images/logo.png",
+  "author": {
+    "name": "Barkerbg001",
+    "email": "barkerbg001+vscode@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/barkerbg001/Xaml-LineUp"
+  },
+  "bugs": {
+    "url": "https://github.com/barkerbg001/Xaml-LineUp/issues",
+    "email": "barkerbg001+vscode@gmail.com"
+  },
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "keywords": [
+    "XAML",
+    "XML",
+    "Formatter",
+    "Attributes",
+    "Inline"
+  ],
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "xamlLineUp.formatXaml",
+        "title": "XAML LineUp: Format XAML"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "xamlLineUp.formatXaml",
+        "key": "ctrl+shift+l",
+        "when": "editorTextFocus && editorLangId == 'xml'"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.95.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "eslint": "^8.34.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "@vscode/test-electron": "^2.2.3"
+  }
+}
