@@ -2,7 +2,7 @@
   "name": "xaml-lineup",
   "displayName": "Xaml LineUp",
   "description": "A VS Code extension that formats XAML attributes inline, keeping them on the same line for improved readability.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "barkerbg001",
   "icon": "images/logo.png",
   "author": {
@@ -25,13 +25,23 @@
     "XML",
     "Formatter",
     "Attributes",
-    "Inline"
+    "Inline",
+    ".NET",
+    ".NET MAUI",
+    "MAUI",
+    "Mobile Development",
+    "Cross-Platform",
+    "UI Design"
   ],
   "categories": [
     "Programming Languages",
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:xml",
+    "onLanguage:xaml",
+    "onCommand:xamlLineUp.formatXaml"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
@@ -40,11 +50,27 @@
         "title": "XAML LineUp: Format XAML"
       }
     ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "xamlLineUp.formatXaml",
+          "when": "resourceExtname == '.xaml'",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "xamlLineUp.formatXaml",
+          "when": "resourceExtname == '.xaml'",
+          "group": "navigation"
+        }
+      ]
+    },
     "keybindings": [
       {
         "command": "xamlLineUp.formatXaml",
-        "key": "ctrl+shift+l",
-        "when": "editorTextFocus && editorLangId == 'xml'"
+        "key": "ctrl+alt+f",
+        "when": "editorTextFocus && resourceExtname == '.xaml'"
       }
     ]
   },
