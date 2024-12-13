@@ -50,6 +50,8 @@ The default keybinding is `Ctrl+Alt+F`. To change it:
 
 ## Release Notes
 
+### 0.0.4
+- New Feature: Ensures a space is added before self-closing tags (/> → />) for better readability and adherence to XAML formatting standards.
 ### 0.0.3
 - Added right-click context menu options for editor and Explorer.
 - Added default keybinding (`Ctrl+Alt+F`) for formatting.

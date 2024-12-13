@@ -35,12 +35,17 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function formatXaml(input: string): string {
-    // Match and reformat all attributes, including those with namespaces and complex names
-    return input.replace(/(\s+)([\w.:]+)="([^"]*)"/g, (match, whitespace, attribute, value) => {
-        // Ensure attributes remain inline
+    // Format attributes inline
+    let formattedText = input.replace(/(\s+)([\w.:]+)="([^"]*)"/g, (match, whitespace, attribute, value) => {
         return ` ${attribute}="${value}"`;
     });
-}
 
+    // Ensure a space before self-closing tags ( />)
+    formattedText = formattedText.replace(/(\S)(\/>)/g, (match, before, selfClose) => {
+        return `${before} ${selfClose}`;
+    });
+
+    return formattedText;
+}
 
 export function deactivate() {}
