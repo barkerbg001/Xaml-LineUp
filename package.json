@@ -2,7 +2,7 @@
   "name": "xaml-lineup",
   "displayName": "Xaml LineUp",
   "description": "A VS Code extension that formats XAML attributes inline, keeping them on the same line for improved readability.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "barkerbg001",
   "icon": "images/logo.png",
   "author": {

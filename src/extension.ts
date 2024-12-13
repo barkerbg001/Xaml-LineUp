@@ -45,7 +45,33 @@ function formatXaml(input: string): string {
         return `${before} ${selfClose}`;
     });
 
-    return formattedText;
+    // Split the input into lines and process indentation
+    let lines = formattedText.split(/(?=<)/g); // Split on opening tags
+    let indentLevel = 0;
+    const indentSize = 4; // Number of spaces for indentation
+    const resultLines = [];
+
+    for (let line of lines) {
+        line = line.trim(); // Remove leading and trailing whitespace
+
+        if (line.startsWith('</')) {
+            // Closing tag: Decrease indentation
+            indentLevel = Math.max(indentLevel - 1, 0);
+        }
+
+        // Add the line with proper indentation
+        resultLines.push(' '.repeat(indentLevel * indentSize) + line);
+
+        if (line.endsWith('>') && !line.startsWith('</') && !line.endsWith('/>')) {
+            // Opening tag: Increase indentation
+            indentLevel++;
+        }
+    }
+
+    return resultLines.join('\n');
 }
+
+
+
 
 export function deactivate() {}
